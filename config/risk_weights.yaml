@@ -1,0 +1,9 @@
+# Teaching assumptions only, NOT regulatory capital requirements
+illustrative_weights:
+  cash: 0.0
+  sovereign_bond: 0.0
+  corporate_bond: 1.0
+  listed_equity: 1.0
+  fund: 1.0
+  derivative: 1.5
+illustrative_capital_fraction: 0.10
