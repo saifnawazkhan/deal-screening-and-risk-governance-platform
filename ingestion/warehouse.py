@@ -32,19 +32,22 @@ def upsert_rows(conn, table: str, rows: list[dict]) -> int:
         return 0
     cols = [c.strip().split()[0] for c in SCHEMAS[table].split(",")]
     pk = cols[0]
-    inserted = 0
+    prepared = []
+    names = cols
     for rec in rows:
         data = dict(rec)
         if pk not in data:
             data[pk] = stable_key([data.get(k) for k in KEYS[table]])
         data["loaded_at"] = utc_now()
-        names = [col for col in cols if col in data]
-        quoted = ", ".join(f'"{c}"' for c in names)
-        placeholders = ", ".join("?" for _ in names)
-        updates = ", ".join(f'"{c}" = excluded."{c}"' for c in names if c != pk)
-        conn.execute(f"INSERT INTO raw_public.{table} ({quoted}) VALUES ({placeholders}) ON CONFLICT ({pk}) DO UPDATE SET {updates}", [data[c] for c in names])
-        inserted += 1
-    return inserted
+        prepared.append([data.get(c) for c in names])
+    quoted = ", ".join(f'"{c}"' for c in names)
+    placeholders = ", ".join("?" for _ in names)
+    updates = ", ".join(f'"{c}" = excluded."{c}"' for c in names if c != pk)
+    statement = f"INSERT INTO raw_public.{table} ({quoted}) VALUES ({placeholders}) ON CONFLICT ({pk}) DO UPDATE SET {updates}"
+    # Batched parameter binding avoids one Python->DuckDB call per XBRL fact.
+    for offset in range(0, len(prepared), 2000):
+        conn.executemany(statement, prepared[offset:offset+2000])
+    return len(prepared)
 
 def log_run(conn, run_id, dataset, entity, status, row_count, error_message, started_at):
     conn.execute("INSERT INTO raw_public.ingestion_runs VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
