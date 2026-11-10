@@ -1,0 +1,9 @@
+# Illustrative assumptions, not issuer financial facts
+sector: technology
+reporting_currency: USD
+forecast_years: 5
+terminal_growth_rate: 0.025
+illustrative_equity_risk_premium: 0.055
+illustrative_pre_tax_cost_of_debt: 0.06
+illustrative_tax_rate: 0.25
+lbo_holding_period_years: 5

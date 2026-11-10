@@ -1,0 +1,9 @@
+# Fictional demo thresholds, not any institution's policy
+single_name:
+  soft_limit_fraction: 0.10
+  hard_limit_fraction: 0.20
+sector:
+  soft_limit_fraction: 0.30
+  hard_limit_fraction: 0.40
+stale_price_days: 5
+recon_break_age_days: 5

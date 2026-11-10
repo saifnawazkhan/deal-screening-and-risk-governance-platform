@@ -1,0 +1,12 @@
+kris:
+  - id: portfolios_above_single_name_hard_limit
+    name: Portfolios above single-name hard limit
+    definition: Fraction of eligible portfolios above the illustrative issuer limit
+    formula: breaching_portfolios / eligible_portfolios
+    owner: Synthetic Risk Oversight
+    frequency: daily
+    source: synthetic_fact_limit_breach
+    thresholds:
+      green_max: 0.02
+      amber_max: 0.05
+      red_above: 0.05
