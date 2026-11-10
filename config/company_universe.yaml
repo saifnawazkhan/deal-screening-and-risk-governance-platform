@@ -2,5 +2,5 @@
 sector: technology
 companies:
   software: [MSFT, ORCL, ADBE, CRM, NOW, INTU, SNPS, CDNS, ADSK, WDAY, TEAM, HUBS, DOCU, ZS, PANW]
-  semiconductors: [NVDA, AMD, INTC, QCOM, AVGO, TXN, MU, ADI, NXPI, MCHP, ON, MRVL, KLAC, LRCX, AMAT]
+  semiconductors: [NVDA, AMD, INTC, QCOM, AVGO, TXN, MU, ADI, NXPI, MCHP, 'ON', MRVL, KLAC, LRCX, AMAT]
   infrastructure_and_services: [CSCO, ANET, IBM, HPE, DELL, NET, AKAM, GDDY, FSLY, EPAM]
