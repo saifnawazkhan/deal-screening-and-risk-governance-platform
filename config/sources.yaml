@@ -1,0 +1,8 @@
+sector: technology
+target_company_count_min: 30
+target_company_count_max: 50
+sources:
+  financial_statements: SEC EDGAR
+  market_prices: yfinance
+  risk_free_rate: FRED
+  precedent_transactions: public_press_releases
