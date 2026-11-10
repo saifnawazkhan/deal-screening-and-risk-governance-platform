@@ -1,8 +1,13 @@
 sector: technology
 target_company_count_min: 30
 target_company_count_max: 50
+company_universe: config/company_universe.yaml
 sources:
-  financial_statements: SEC EDGAR
-  market_prices: yfinance
-  risk_free_rate: FRED
-  precedent_transactions: public_press_releases
+  financial_statements: https://data.sec.gov/api/xbrl/companyfacts/
+  sec_ticker_registry: https://www.sec.gov/files/company_tickers.json
+  market_prices: Yahoo Finance via yfinance (third party)
+  risk_free_rate: FRED graph CSV (DGS10, DGS2, DFF)
+  precedent_transactions: documented public press releases or SEC filings only
+network:
+  retries: 3
+  timeout_seconds: 30
